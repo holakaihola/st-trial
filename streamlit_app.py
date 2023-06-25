@@ -31,24 +31,30 @@ This is a dashboard showing the *forecasted prices* of different types of HDB :h
 ''')
 
 
-TOWNS = ["ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG", "BUKIT TIMAH", "CENTRAL AREA","CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST", "JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG", "SENGKANG", "SERANGOON", "TAMPINES", "TOA PAYOH", "WOODLANDS", "YISHUN"]
-FLAT_TYPES = ['1 ROOM', '2 ROOM', '3 ROOM', '4 ROOM', '5 ROOM', 'EXECUTIVE', 'MULTI-GENERATION']
-EXCLUSIONS = {
-    "ANG MO KIO, 1 ROOM", "BEDOK, 1 ROOM", "BISHAN, 1 ROOM", "BUKIT BATOK, 1 ROOM", "BUKIT PANJANG, 1 ROOM", "BUKIT TIMAH, 1 ROOM", "CENTRAL AREA, 1 ROOM", "CHOA CHU KANG, 1 ROOM", "CLEMENTI, 1 ROOM", "GEYLANG, 1 ROOM", "HOUGANG, 1 ROOM", "JURONG EAST, 1 ROOM", "JURONG WEST, 1 ROOM", "KALLANG/WHAMPOA, 1 ROOM", "MARINE PARADE, 1 ROOM", "PASIR RIS, 1 ROOM", "PUNGGOL, 1 ROOM", "QUEENSTOWN, 1 ROOM", "SEMBAWANG, 1 ROOM", "SENGKANG, 1 ROOM", "SERANGOON, 1 ROOM", "TAMPINES, 1 ROOM", "TOA PAYOH, 1 ROOM", "WOODLANDS, 1 ROOM", "YISHUN, 1 ROOM",
-    "BISHAN, 2 ROOM", "BUKIT BATOK, 2 ROOM", "BUKIT TIMAH, 2 ROOM", "MARINE PARADE, 2 ROOM",
-    "BUKIT MERAH, EXECUTIVE", "CENTRAL AREA, EXECUTIVE", "MARINE PARADE, EXECUTIVE",
-    "ANG MO KIO, MULTI-GENERATION", "BEDOK, MULTI-GENERATION", "BUKIT BATOK, MULTI-GENERATION", "BUKIT MERAH, MULTI-GENERATION", "BUKIT PANJANG, MULTI-GENERATION", "BUKIT TIMAH, MULTI-GENERATION", "CENTRAL AREA, MULTI-GENERATION","CHOA CHU KANG, MULTI-GENERATION", "CLEMENTI, MULTI-GENERATION", "GEYLANG, MULTI-GENERATION", "HOUGANG, MULTI-GENERATION", "JURONG EAST, MULTI-GENERATION", "JURONG WEST, MULTI-GENERATION", "KALLANG/WHAMPOA, MULTI-GENERATION", "MARINE PARADE, MULTI-GENERATION", "PASIR RIS, MULTI-GENERATION", "PUNGGOL, MULTI-GENERATION", "QUEENSTOWN, MULTI-GENERATION", "SEMBAWANG, MULTI-GENERATION", "SENGKANG, MULTI-GENERATION", "SERANGOON, MULTI-GENERATION", "TOA PAYOH, MULTI-GENERATION", "WOODLANDS, MULTI-GENERATION"
-    }
+# TOWNS = ["ANG MO KIO", "BEDOK", "BISHAN", "BUKIT BATOK", "BUKIT MERAH", "BUKIT PANJANG", "BUKIT TIMAH", "CENTRAL AREA","CHOA CHU KANG", "CLEMENTI", "GEYLANG", "HOUGANG", "JURONG EAST", "JURONG WEST", "KALLANG/WHAMPOA", "MARINE PARADE", "PASIR RIS", "PUNGGOL", "QUEENSTOWN", "SEMBAWANG", "SENGKANG", "SERANGOON", "TAMPINES", "TOA PAYOH", "WOODLANDS", "YISHUN"]
+# FLAT_TYPES = ['1 ROOM', '2 ROOM', '3 ROOM', '4 ROOM', '5 ROOM', 'EXECUTIVE', 'MULTI-GENERATION']
+# EXCLUSIONS = {
+#     "ANG MO KIO, 1 ROOM", "BEDOK, 1 ROOM", "BISHAN, 1 ROOM", "BUKIT BATOK, 1 ROOM", "BUKIT PANJANG, 1 ROOM", "BUKIT TIMAH, 1 ROOM", "CENTRAL AREA, 1 ROOM", "CHOA CHU KANG, 1 ROOM", "CLEMENTI, 1 ROOM", "GEYLANG, 1 ROOM", "HOUGANG, 1 ROOM", "JURONG EAST, 1 ROOM", "JURONG WEST, 1 ROOM", "KALLANG/WHAMPOA, 1 ROOM", "MARINE PARADE, 1 ROOM", "PASIR RIS, 1 ROOM", "PUNGGOL, 1 ROOM", "QUEENSTOWN, 1 ROOM", "SEMBAWANG, 1 ROOM", "SENGKANG, 1 ROOM", "SERANGOON, 1 ROOM", "TAMPINES, 1 ROOM", "TOA PAYOH, 1 ROOM", "WOODLANDS, 1 ROOM", "YISHUN, 1 ROOM",
+#     "BISHAN, 2 ROOM", "BUKIT BATOK, 2 ROOM", "BUKIT TIMAH, 2 ROOM", "MARINE PARADE, 2 ROOM",
+#     "BUKIT MERAH, EXECUTIVE", "CENTRAL AREA, EXECUTIVE", "MARINE PARADE, EXECUTIVE",
+#     "ANG MO KIO, MULTI-GENERATION", "BEDOK, MULTI-GENERATION", "BUKIT BATOK, MULTI-GENERATION", "BUKIT MERAH, MULTI-GENERATION", "BUKIT PANJANG, MULTI-GENERATION", "BUKIT TIMAH, MULTI-GENERATION", "CENTRAL AREA, MULTI-GENERATION","CHOA CHU KANG, MULTI-GENERATION", "CLEMENTI, MULTI-GENERATION", "GEYLANG, MULTI-GENERATION", "HOUGANG, MULTI-GENERATION", "JURONG EAST, MULTI-GENERATION", "JURONG WEST, MULTI-GENERATION", "KALLANG/WHAMPOA, MULTI-GENERATION", "MARINE PARADE, MULTI-GENERATION", "PASIR RIS, MULTI-GENERATION", "PUNGGOL, MULTI-GENERATION", "QUEENSTOWN, MULTI-GENERATION", "SEMBAWANG, MULTI-GENERATION", "SENGKANG, MULTI-GENERATION", "SERANGOON, MULTI-GENERATION", "TOA PAYOH, MULTI-GENERATION", "WOODLANDS, MULTI-GENERATION"
+#     }
 
-town_flat_types = [t+', '+ft for ft in FLAT_TYPES for t in TOWNS if t+', '+ft not in EXCLUSIONS]
-defaults = town_flat_types[:2]
+# town_flat_types = [t+', '+ft for ft in FLAT_TYPES for t in TOWNS if t+', '+ft not in EXCLUSIONS]
+# defaults = town_flat_types[:2]
 
-options = st.multiselect(
-    'Select Town and Flat Type',
-    town_flat_types,
-    defaults,
-    max_selections=4)
+# options = st.multiselect(
+#     'Select Town and Flat Type',
+#     town_flat_types,
+#     defaults,
+#     max_selections=4)
 
+
+# Set the default number of clusters
+default_clusters = 3
+
+# Display the slider for selecting the number of clusters
+num_clusters = st.sidebar.slider("Number of Clusters", min_value=2, max_value=10, value=default_clusters)
 
 
 
@@ -66,20 +72,6 @@ data['GDP'] = data['GDP'].astype(float)
 
 # col1, mid, col2 = st.columns([2,0.5,2])
 
-# ### SELECTIONS ###
-# with col1:
-#     # town
-#     town_filter = list(data["town"].unique())
-#     option_town = st.selectbox("Select a town", options=sorted(town_filter, key=str.lower))
-#     filtered_data = data[data["town"] == option_town]
-
-#     # distance to MRT station
-#     min_value_mrt = float(data["Distance_from_MRT"].min())
-#     max_value_mrt = float(data["Distance_from_MRT"].max())
-#     select_range_mrt = st.slider("Select distance to the closest MRT station (km)", min_value_mrt, max_value_mrt,
-#                                  (min_value_mrt, max_value_mrt), step=0.01)
-#     filtered_data = filtered_data[(filtered_data["Distance_from_MRT"] >= select_range_mrt[0]) & (
-#                 filtered_data["Distance_from_MRT"] <= select_range_mrt[1])]
 
 # Extract the 3 numerical variables
 X = data.iloc[:, 1:4].values
@@ -88,23 +80,9 @@ X = data.iloc[:, 1:4].values
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# # Plot within-cluster sum of square.
-# wss = []
-
-# K = range(2,11)
-# for k in K:
-#     kmeans = KMeans(n_clusters=k, random_state=123)
-#     kmeans = kmeans.fit(X_scaled)
-#     wss.append(kmeans.inertia_)
-    
-# plt.plot(K, wss, "b*-")
-# plt.xlabel("Number of clusters k")
-# plt.ylabel("Total Within Sum of Squares")
-# plt.title("Optimal number of clusters for kmeans")
-# plt.show()
 
 # Perform K-means clustering
-kmeans = KMeans(n_clusters=3)
+kmeans = KMeans(n_clusters=num_clusters)
 kmeans.fit(X_scaled)
 
 # Get the cluster labels
