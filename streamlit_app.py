@@ -2,21 +2,12 @@ import io
 import json
 import pandas as pd
 import numpy as np
-import folium as fs
-import altair as alt
-
-import requests
-from PIL import Image
-
 
 import streamlit as st
-import plotly.express as px
-import plotly.graph_objs as go
 
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import MinMaxScaler
-from pylab import bone, pcolor, colorbar, plot, show
 from sklearn import metrics
 
 from sklearn.datasets import make_blobs
