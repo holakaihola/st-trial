@@ -1,5 +1,3 @@
-import io
-import json
 import pandas as pd
 import numpy as np
 
@@ -7,7 +5,7 @@ import streamlit as st
 
 import matplotlib.pyplot as plt
 
-from sklearn.preprocessing import MinMaxScaler
+
 from sklearn import metrics
 
 from sklearn.datasets import make_blobs
@@ -15,6 +13,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from matplotlib.patches import Patch
 
 
 st.markdown(
@@ -27,7 +26,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-### READ DATA ###
+###########################################
+######## Read Data ###############
+###########################################
 file_location = "USData.csv"
 data = pd.read_csv(file_location, index_col=0)
 
@@ -36,10 +37,6 @@ data = data.rename(columns = {'Energy use (kg of oil equivalent per capita)':'En
                                   'CO2 emissions NET':'CO2 Emissions'})
 
 data = data.iloc[1:56].astype(float)
-# data['Energy'] = data['Energy'].astype(float)
-# data['GDP'] = data['GDP'].astype(float)
-
-# col1, mid, col2 = st.columns([2,0.5,2])
 
 # Get the column names of the DataFrame
 column_names = data.columns.tolist()
@@ -48,7 +45,7 @@ column_names = data.columns.tolist()
 default_columns = ['Energy', 'GDP', 'CO2 Emissions']
 
 # Display the multi-select widget for selecting columns
-st.markdown("<h4 style='color: #0066cc'>Step 1: Select the variables to use in clustering</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='color: #0066cc'>Step 1: Use the dropdown to select the variables to use in clustering</h4>", unsafe_allow_html=True)
 
 selected_columns = st.multiselect("", column_names, default=default_columns)
 
@@ -57,17 +54,6 @@ if len(selected_columns) < 2:
     st.error("Please select at least two columns.")
     st.stop()
     
-# # Apply a theme to change the color of the multiselect widget
-# st.markdown(
-#     """
-#     <style>
-#     [data-baseweb="select"] { color: black !important; }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-
-
 # Subset the data with the selected columns
 selected_data = data[selected_columns]
 
@@ -79,14 +65,14 @@ default_clusters = 3
 
 # Display the slider for selecting the number of clusters
 
-st.markdown("<h4 style='color: #0066cc'>Step 2: Select the Number of Clusters</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='color: #0066cc'>Step 2: Move the slider below to select the Number of Clusters</h4>", unsafe_allow_html=True)
 
 num_clusters = st.slider("", min_value=2, max_value=10, value=default_clusters)
 
 ###########################################
 ######## Scaling and Kmeans ###############
 ###########################################
-st.markdown(f"<h4 style='color: #0066cc'>Step 3: Evaluate Outputs for {num_clusters} clusters</h4>", unsafe_allow_html=True)
+st.markdown(f"<h4 style='color: #0066cc'>Step 3: Results: Evaluate Outputs for {num_clusters} clusters</h4>", unsafe_allow_html=True)
 
 #Scale the data 
 scaler = StandardScaler()
@@ -142,15 +128,6 @@ st.pyplot(plt)
 ##### Performance metrics ####
 ###################################################
 ####### Section Title #######
-# st.markdown(
-#     """
-#     <div style='background-color: #0066cc; padding: 10px'>
-#         <h3 style='color: white;text-align: center;'>
-#         k-means Cluster Performance Metrics</h3>
-#     </div>
-#     """,
-#     unsafe_allow_html=True
-# )
 
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 
@@ -162,7 +139,7 @@ davies_bouldin_kmeans = davies_bouldin_score(X_scaled, cluster_labels)
 st.markdown(f'<style>body{{background-color: #0066cc;}}</style>', unsafe_allow_html=True)
 
 # Display scores as a summary table
-st.markdown("<h3 style='color: #0066cc;'>k-means Cluster Performance Metrics</h3>", unsafe_allow_html=True)
+st.markdown(f"<h3 style='color: #0066cc;'>k-means {num_clusters} Cluster Performance Metrics</h3>", unsafe_allow_html=True)
 st.subheader("**Silhouette Score:**")
 st.markdown(f"<p style='color:#0066cc; font-size: 24px;'>{round(silhouette_avg_kmeans, 2)}</p>",unsafe_allow_html=True)
 
@@ -186,11 +163,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
-
-from matplotlib.patches import Patch
-
 
 # Define a dictionary mapping full column names to shortened versions
 title_mapping = {
