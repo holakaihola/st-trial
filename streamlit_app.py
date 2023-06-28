@@ -211,7 +211,7 @@ title_mapping = {
 fig, axs = plt.subplots(len(selected_columns), 1, figsize=(10, 10), sharex=True)
 
 for i, column in enumerate(selected_columns):
-    axs[i].plot(data.index, data[column], color='gray')
+    axs[i].plot(list(data.index), data[column], color='gray')
     scatter = axs[i].scatter(data.index, data[column], c=data['Cluster'].map(color_mapping))
     axs[i].set_title(title_mapping[column])
 
