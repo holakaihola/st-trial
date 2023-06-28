@@ -208,31 +208,31 @@ st.pyplot(plt)
 ##### Additional Charts ####
 ###################################################
 # Create a list of columns not selected
-st.markdown(f"<h3 style='color: #0066cc;'>Clusters overlayed on variables not used in clustering</h3>", unsafe_allow_html=True)
-
 not_selected_columns = [column for column in column_names if column not in selected_columns]
 
+if len(not_selected_columns) > 0:
+    st.markdown(f"<h3 style='color: #0066cc;'>Clusters overlayed on variables not used in clustering</h3>", unsafe_allow_html=True)
 
-fig, axs = plt.subplots(len(not_selected_columns), 1, figsize=(10, 10), sharex=True)
+    fig, axs = plt.subplots(len(not_selected_columns), 1, figsize=(10, 10), sharex=True)
 
-for i, column in enumerate(not_selected_columns):
-    axs[i].plot(list(data.index), list(data[column]), color='gray')
-    scatter = axs[i].scatter(data.index, data[column], c=data['Cluster'].map(color_mapping))
-    axs[i].set_title(title_mapping[column])
+    for i, column in enumerate(not_selected_columns):
+        axs[i].plot(list(data.index), list(data[column]), color='gray')
+        scatter = axs[i].scatter(data.index, data[column], c=data['Cluster'].map(color_mapping))
+        axs[i].set_title(title_mapping[column])
 
-# Get the unique cluster labels present in data['Cluster']
-unique_clusters = data['Cluster'].unique()
+    # Get the unique cluster labels present in data['Cluster']
+    unique_clusters = data['Cluster'].unique()
 
-# Create custom legend for the clusters present
-legend_elements = []
-for cluster in unique_clusters:
-    legend_elements.append(Patch(facecolor=color_mapping[cluster], label=f'Cluster {cluster + 1}'))
+    # Create custom legend for the clusters present
+    legend_elements = []
+    for cluster in unique_clusters:
+        legend_elements.append(Patch(facecolor=color_mapping[cluster], label=f'Cluster {cluster + 1}'))
 
-plt.xlabel("Year")
-# plt.suptitle('Selected Columns')
-plt.tight_layout()
+    plt.xlabel("Year")
+    # plt.suptitle('Selected Columns')
+    plt.tight_layout()
 
-# Add the legend to the plot
-plt.legend(handles=legend_elements)
+    # Add the legend to the plot
+    plt.legend(handles=legend_elements)
 
-st.pyplot(plt)
+    st.pyplot(plt)
